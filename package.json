@@ -1,0 +1,50 @@
+{
+	"name": "@onexone/provenance-open-source",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Provenance Open Source codebase",
+	"scripts": {
+		"setup": "npm install",
+		"build": "npm run build --workspaces",
+		"test": "npm run test --workspaces",
+		"cli:dev": "npm run dev -w @onexone/cli --",
+		"cli:build": "npm run build -w @onexone/cli",
+		"provenance:scan:api": "npm run provenance:scan -w @onexone/api",
+		"provenance:scan:api:dry": "npm run provenance:scan:dry -w @onexone/api",
+		"provenance:generate:node": "npm run provenance:generate -w @onexone/api-client",
+		"provenance:generate:flutter": "./packages/onexone_sdk/scripts/generate_client.sh",
+		"cli:install:global": "npm install -g ./apps/cli"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"devDependencies": {
+		"@types/cors": "^2.8.17",
+		"@types/express": "^4.17.17",
+		"@types/express-fileupload": "^1.4.2",
+		"@types/multer": "^2.0.0",
+		"@types/node": "^20.5.9",
+		"@types/tar-stream": "^3.1.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.3",
+		"@typescript-eslint/parser": "^6.7.3",
+		"dotenv": "^17.2.3",
+		"dotenv-cli": "^11.0.0",
+		"eslint": "^8.47.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-promise": "^6.1.1",
+		"prettier": "^3.0.3",
+		"prisma": "^7.2.0",
+		"shx": "^0.3.3",
+		"ts-node": "^10.9.2",
+		"tsconfig-paths": "^4.2.0",
+		"tsup": "^8.5.1",
+		"tsx": "^4.21.0",
+		"typescript": "^5.5.3"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}

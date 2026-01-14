@@ -1,0 +1,27 @@
+{
+  "name": "@onexone/api-client",
+  "version": "1.0.0",
+  "description": "Generated client for express and nuxt apps.",
+  "private": true,
+  "keywords": [
+    "axios",
+    "typescript",
+    "openapi-client",
+    "openapi-generator",
+    "@onexone/api-client"
+  ],
+  "license": "Unlicense",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build",
+    "provenance:generate": "../../apps/cli/bin/dev provenance generate --output ./ --target npm --appId c814785a-aeee-4f2c-b3bd-bdb082384ee3 --packageName api-client",
+    "generate": "npx @openapitools/openapi-generator-cli generate -i ../../apps/api/src/generated/openapi.json -g typescript-axios -o ./src --api-package=api --model-package=models --additional-properties=npmName=api-client,supportsES6=true,withSeparateModelsAndApi=true,useSingleRequestParameter=true"
+  },
+  "dependencies": {
+    "axios": "^1.6.1"
+  }
+}

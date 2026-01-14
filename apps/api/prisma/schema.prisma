@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+generator json {
+  provider = "prisma-json-schema-generator"
+  output   = "../src/generated/json-schema"
+}
+
+datasource db {
+  provider = "cockroachdb"
+}
+
+enum AnalysisStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum HttpMethod {
+  GET
+  POST
+  PUT
+  DELETE
+  PATCH
+  OPTIONS
+  HEAD
+}
+
+model Endpoint {
+  id     String @id @default(uuid())
+  app_id String
+
+  path                 String
+  method               HttpMethod
+  service_name         String?
+  client_function_name String?
+
+  description String @default("No description provided")
+
+  source_code     String?
+  code_hash       String?
+  analysis_status AnalysisStatus @default(PENDING)
+  last_synced_at  DateTime?
+  relevent_schema String?
+
+  ai_raw_output Json?
+
+  outputs    EndpointOutput[]    @relation("EndpointToOutputs")
+  parameters EndpointParameter[] @relation("EndpointToParameters")
+
+  required_permission_ids String[]  @default([])
+  deleted_at              DateTime?
+
+  @@index([app_id])
+  @@index([required_permission_ids])
+}
+
+enum EndpointParameterLocation {
+  PATH
+  QUERY
+  BODY
+  NOT_SPECIFIED
+}
+
+model EndpointParameter {
+  id            String                    @id @default(uuid())
+  name          String
+  type          Json
+  description   String
+  endpoint_id   String
+  required      Boolean                   @default(false)
+  default_value Json                      @default("null")
+  endpoint      Endpoint                  @relation("EndpointToParameters", fields: [endpoint_id], references: [id], onDelete: Cascade)
+  location      EndpointParameterLocation @default(NOT_SPECIFIED)
+
+  @@index([endpoint_id])
+}
+
+model EndpointOutput {
+  id          String   @id @default(uuid())
+  name        String
+  type        String
+  description String
+  endpoint_id String
+  status_code Int
+  return_json Json     @default("{}")
+  examples    Json?
+  endpoint    Endpoint @relation("EndpointToOutputs", fields: [endpoint_id], references: [id], onDelete: Cascade)
+
+  @@index([endpoint_id])
+}

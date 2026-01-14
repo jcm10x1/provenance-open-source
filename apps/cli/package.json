@@ -1,0 +1,47 @@
+{
+	"name": "@onexone/cli",
+	"version": "0.0.0",
+	"private": true,
+	"bin": {
+		"1x1": "./bin/run.js"
+	},
+	"type": "module",
+	"files": [
+		"/bin",
+		"/dist",
+		"/oclif.manifest.json"
+	],
+	"scripts": {
+		"build": "tsc -b",
+		"clean": "rm -rf dist",
+		"dev": "./bin/dev",
+		"prepack": "npm run build && oclif manifest && oclif readme",
+		"postpack": "rm -f oclif.manifest.json",
+		"version": "oclif readme && git add README.md"
+	},
+	"dependencies": {
+		"@oclif/core": "^4.0.0",
+		"@oclif/plugin-help": "^6.0.0",
+		"@onexone/api-client": "*",
+		"@onexone/core": "*",
+		"ts-morph": "^27.0.2"
+	},
+	"devDependencies": {
+		"@oclif/test": "^4.0.0"
+	},
+	"oclif": {
+		"bin": "1x1",
+		"dirname": "1x1",
+		"helpClass": "./dist/help.js",
+		"commands": "./dist/commands",
+		"plugins": [
+			"@oclif/plugin-help"
+		],
+		"topicSeparator": " ",
+		"topics": {
+			"provenance": {
+				"description": "CLI tool for 1x1 Provenance."
+			}
+		}
+	}
+}

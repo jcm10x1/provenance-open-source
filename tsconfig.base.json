@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* BASELINE SETUP */
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": [
+      "ESNext"
+    ],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+
+      "@onexone/cli": [
+        "apps/cli/src/index.ts"
+      ],
+      "@onexone/api-client": [
+        "packages/api-client/dist/index.d.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
