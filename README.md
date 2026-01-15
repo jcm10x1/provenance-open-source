@@ -8,6 +8,6 @@ Generates: The CLI uses the AI enhanced DB entries to generate the OpenAPI spec 
 
 Before using, make sure dependencies are installed and that the DB is running, migrated, and generated.
 
-The DB entries cam also be used for security and documentation purposes.
+The DB entries can also be used for security and documentation purposes.
 
 License: MIT
